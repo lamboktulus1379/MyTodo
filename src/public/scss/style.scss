@@ -1,0 +1,27 @@
+
+$color-primary: #5452f6;
+$color-white: #ffffff;
+$--g-color-secondary: #2097f6;
+$--g-color-white: #ffffff;
+$--g-color-default: #c4c4c4;
+$--g-color-white-md: #eeeeff;
+$--g-color-white-sm: rgba(229, 229, 229, 0.24);
+$--g-color-danger: #de1306;
+
+.app-container-sidebar {
+    flex: 0 0 250px;
+    background: var(--g-color-primary);
+
+    .g-sidebar {
+        .g-sidebar-head {
+        }
+    }
+
+    ul {
+        list-style: none;
+
+        li {
+            border: 1px solid #ccc;
+        }
+    }
+}

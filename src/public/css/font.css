@@ -1,0 +1,29 @@
+.g-fs-xxs {
+  font-size: 10px;
+}
+.g-fs-xs {
+  font-size: 12px;
+}
+.g-fs-sm {
+  font-size: 14px;
+}
+.g-fs-md {
+  font-size: 16px;
+}
+.g-fs-lg {
+  font-size: 18px;
+}
+.g-fs-xl {
+  font-size: 20px;
+}
+.g-fs-xxl {
+  font-size: 22px;
+}
+.g-fs-xxxl {
+  font-size: 24px;
+}
+
+/* Weight */
+.g-fw-700 {
+  font-weight: 700;
+}

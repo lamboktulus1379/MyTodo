@@ -1,0 +1,74 @@
+.g-table {
+    border: 1px solid var(--g-color-primary);
+    border-collapse: collapse;
+    width: 100%;
+}
+.g-table .g-table-head {
+    border: 1px solid var(--g-color-white);
+}
+.g-table .g-table-row {
+    overflow: hidden;
+    width: 100%;
+    height: 50px;
+    position: relative;
+}
+.g-table .g-table-row:nth-child(even) {
+    background-color: var(--g-color-white-sm);
+}
+.g-table .g-table-col {
+    border: none;
+    transition: all ease-out 0.25s;
+}
+.g-table .g-table-header {
+}
+
+.g-expanded-border {
+    animation: g-expanded-border 2s linear 0.5s infinite reverse;
+}
+.g-slide-left-out {
+    /* animation: g-slide-left-out 3s linear 0 1 normal; */
+
+    animation: g-slide-left-out 5s forwards;
+    animation-delay: 2s;
+}
+
+@keyframes g-expanded-border {
+    0% {
+        border: 1px solid var(--g-color-primary);
+    }
+    25% {
+        border: 2px solid var(--g-color-primary);
+    }
+    50% {
+        border: 3px solid var(--g-color-primary);
+    }
+    75% {
+        border: 2px solid var(--g-color-primary);
+    }
+    100% {
+        border: 1px solid var(--g-color-primary);
+    }
+}
+
+@keyframes g-slide-left-out {
+    0% {
+        left: 20%;
+        position: absolute;
+    }
+    25% {
+        left: 40%;
+        position: absolute;
+    }
+    50% {
+        left: 40%;
+        position: absolute;
+    }
+    75% {
+        left: 60%;
+        position: absolute;
+    }
+    100% {
+        left: 80%;
+        position: absolute;
+    }
+}

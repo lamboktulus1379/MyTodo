@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  $color-primary: #5452F6;
+  $color-white: #ffffff;
+}
+html, body {
+  font-family: Roboto, sans-serif;
+  background: black;
+}
+
+.app-fluid {  
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 10%);
+}
+.app-container {
+  width: 1280px;
+}
