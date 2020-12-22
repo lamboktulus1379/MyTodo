@@ -4,7 +4,7 @@
             <b-col md="3">
                 <b-form-input
                     v-model="sectionSave.title"
-                    placeholder="Enter your name"
+                    placeholder="Enter Section"
                 ></b-form-input>
 
                 <b-form-textarea
@@ -39,15 +39,15 @@
                                             >
                                                 {{ section.title }}
                                             </b-button>
-                                            <b-badge
+                                            <b-button
                                                 variant="primary"
                                                 @click="editSection(section)"
-                                                >Edit</b-badge
+                                                >Edit</b-button
                                             >
-                                            <b-badge
+                                            <b-button
                                                 variant="danger"
                                                 @click="destroySection(section)"
-                                                >Delete</b-badge
+                                                >Delete</b-button
                                             >
                                         </b-row>
                                     </b-container>
@@ -71,7 +71,7 @@
                 <div class="app-container-view">
                     <b-form-input
                         v-model="task.title"
-                        placeholder="Enter your name"
+                        placeholder="Enter Todo"
                     ></b-form-input>
 
                     <b-form-textarea
@@ -92,29 +92,23 @@
                     >
                     <div class="">
                         <div v-for="(task, idx) in section.tasks" :key="idx">
-                            <b-form-checkbox
-                                id="checkbox-1"
-                                v-model="section.tasks[idx].state"
-                                name="checkbox-1"
-                                value="1"
-                                @change="toggle(idx)"
-                                unchecked-value="0"
+                            <input
+                                type="checkbox"
+                                :checked="task.state == '1'"
+                                @change="toggle(task)"
+                            />
+                            <span
+                                :class="{ 'task-check': task.state == '1' }"
+                                >{{ task.title }}</span
                             >
-                                <span
-                                    :class="{ 'task-check': task.state == '1' }"
-                                    >{{ task.title }}</span
-                                >
-                                <b-button
-                                    variant="primary"
-                                    @click="editTodo(task)"
-                                    >Edit</b-button
-                                >
-                                <b-button
-                                    variant="danger"
-                                    @click="destroyTodo(task)"
-                                    >Delete</b-button
-                                >
-                            </b-form-checkbox>
+                            <b-button variant="primary" @click="editTodo(task)"
+                                >Edit</b-button
+                            >
+                            <b-button
+                                variant="danger"
+                                @click="destroyTodo(task)"
+                                >Delete</b-button
+                            >
                         </div>
                     </div>
                 </div>
@@ -201,6 +195,15 @@ export default {
                 this.getSection(this.task.section_id);
             });
         },
+
+        toggle(task) {
+            let t = task;
+            t.state = task.state == "0" ? "1" : "0";
+            Axios.patch(`api/tasks/${task.id}`, t).then(res => {
+                console.log("Response: ", res);
+                this.getSection(task.section_id);
+            });
+        },
         destroyTodo(task) {
             Axios.delete(`/api/tasks/${task.id}`).then(res => {
                 console.log("Response: ", res);
@@ -217,10 +220,85 @@ export default {
         },
 
         editSection(section) {
-            this.sectionSave = sectionSave;
+            this.sectionSave = section;
             this.editSectionActive = true;
         },
         saveSection() {
-            Axios.patch(`api/section/${this.section.id}`, this.section).then(
-                res => {
-                 
+            Axios.patch(
+                `api/sections/${this.section.id}`,
+                this.sectionSave
+            ).then(res => {
+                console.log("REsponse: ", res);
+                this.getSections();
+                this.sectionSave = {};
+            });
+        },
+        destroySection(section) {
+            Axios.delete(`/api/sections/${section.id}`).then(res => {
+                console.log("Response: ", res);
+
+                this.getSections();
+            });
+        }
+    },
+
+    async mounted() {
+        this.loading = true;
+        await this.getSections();
+        await this.getSection(1);
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+$color-primary: #5452f6;
+$color-white: #ffffff;
+.task-check {
+    text-decoration: line-through;
+}
+.app-container-home {
+    .donation-badge {
+        padding: 16px;
+        width: 50%;
+
+        @media only screen and (max-width: 768px) {
+            width: 100%;
+        }
+    }
+    .section-home {
+        display: flex;
+        .sh-left {
+            flex: 0 0 50%;
+            @media only screen and (max-width: 768px) {
+                flex: 0 0 100%;
+            }
+
+            .section-title {
+                font-weight: 600;
+                color: $color-primary;
+            }
+            .section-content p {
+                color: $color-primary;
+            }
+        }
+        .sh-right {
+            @media only screen and (max-width: 768px) {
+                display: none;
+            }
+            flex: 0 0 calc(50% - 16px);
+
+            .app-container-image {
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .app-image-bottom {
+        margin-top: 32px;
+        img {
+            width: 50%;
+        }
+    }
+}
+</style>

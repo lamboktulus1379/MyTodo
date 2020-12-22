@@ -16,7 +16,6 @@ class SectionController extends Controller
     }
     public function index()
     {
-
         return SectionResource::collection($this->_sectionRepository->all());
     }
     public function store()
@@ -32,10 +31,15 @@ class SectionController extends Controller
 
     public function show(int $section)
     {
-        return   $this->_sectionRepository->find($section, 'tasks');
+        return $this->_sectionRepository->find($section, 'tasks');
     }
 
-    public function validateData()
+    public function destroy(int $section) {
+        return $this->_sectionRepository->delete($section);
+
+    }
+
+    public function validateRequest()
     {
         return request()->validate(['title' => 'required', 'description' => 'nullable|string']);
     }

@@ -6,6 +6,8 @@ use App\Models\Task;
 use App\Repository\TaskRepositoryInterface;
 use App\Http\Controllers\Controller;
 
+use App\Http\Resources\TaskResource;
+
 class TaskController extends Controller
 {
     public $_taskRepository;
@@ -15,7 +17,7 @@ class TaskController extends Controller
     }
     public function index()
     {
-        return $this->_taskRepository->all();
+        return TaskResource::collection($this->_taskRepository->all());
     }
     public function store()
     {

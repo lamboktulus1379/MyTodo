@@ -28,7 +28,7 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: blog_test
+      MYSQL_DATABASE: todo_dot
       MYSQL_USER: me
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password

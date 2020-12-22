@@ -18,7 +18,10 @@ class TaskResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'state' => $this->state
+            'state' => $this->state,
+            'status' => $this->state == '1' ? true: false,
+            'checked' => true,
+            'unchecked' => false,
         ];
     }
 }
